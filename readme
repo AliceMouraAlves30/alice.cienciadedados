@@ -1,0 +1,68 @@
+# Previsão de Preços das Ações do Walmart com ARIMA
+
+Este projeto realiza a análise e previsão dos preços de fechamento das ações do Walmart utilizando o modelo ARIMA (AutoRegressive Integrated Moving Average). O código lê os dados históricos de preços de ações, realiza a análise exploratória dos dados, ajusta o modelo ARIMA e gera previsões futuras.
+
+## Estrutura do Projeto
+
+- `previsao_walmart.py`: Script principal contendo todo o código para leitura dos dados, análise, ajuste do modelo e geração de gráficos e previsões.
+- `README.md`: Este arquivo, fornecendo uma visão geral do projeto.
+- `LICENSE`: Licença do projeto.
+- `.gitignore`: Arquivo para especificar quais arquivos e diretórios devem ser ignorados pelo Git.
+
+## Requisitos
+
+- Python 3.x
+- Bibliotecas:
+  - pandas
+  - matplotlib
+  - statsmodels
+
+## Instalação
+
+1. Clone este repositório:
+    ```bash
+    git clone https://github.com/seu-usuario/previsao-walmart.git
+    cd previsao-walmart
+    ```
+
+2. Crie um ambiente virtual e ative-o:
+    ```bash
+    python -m venv env
+    source env/bin/activate  # Para Windows, use `env\Scripts\activate`
+    ```
+
+3. Instale as dependências:
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+## Uso
+
+1. Certifique-se de que a URL do arquivo CSV do Google Drive está correta no script `previsao_walmart.py`.
+
+2. Execute o script:
+    ```bash
+    python previsao_walmart.py
+    ```
+
+3. O script irá gerar gráficos dos preços de fechamento, resíduos do modelo ARIMA e previsões futuras.
+
+## Resultados
+
+- Gráficos dos preços de fechamento das ações do Walmart.
+- Resumo do modelo ARIMA ajustado.
+- Gráficos dos resíduos do modelo ARIMA.
+- Previsões dos preços das ações para os próximos 30 dias.
+
+## Contribuição
+
+Contribuições são bem-vindas! Por favor, abra uma issue ou envie um pull request.
+
+## Licença
+
+Este projeto está licenciado sob os termos da licença MIT. Veja o arquivo `LICENSE` para mais detalhes.
+
+## Contato
+
+- Autor: Seu Nome
+- Email: seu-email@example.com
