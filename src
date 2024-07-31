@@ -1,0 +1,117 @@
+importar  pandas  como  pd 
+importar  matplotlib.pyplot  como  plt 
+de  statsmodels.tsa.arima.model  importar  ARIMA
+
+# Caminho do arquivo no Google Drive 
+file_url  =  "https://drive.google.com/uc?id=1bCfacYCzpkP3P0wYQWDgdfs6pT0uQCma"
+
+#Leitura do arquivo CSV diretamente do Google Drive 
+df  =  pd . read_csv ( url_do_arquivo )
+
+# Convertendo a coluna 'Date' para o formato datetime 
+df [ 'Date' ]  =  pd . to_datetime ( df [ 'Data' ])
+
+# Definindo a coluna 'Data' como índice 
+df . set_index ( 'Data' ,  inplace = True )
+
+# Plotando os gráficos de preços de fechamento 
+plt . figura ( figsize = ( 10 ,  6 )) 
+plt . plot ( df [ 'Fechar' ],  cor = 'azul' ) 
+plt . title ( 'Preços de Fechamento das Ações do Walmart' ) 
+plt . xlabel ( 'Dados' ) 
+plt . ylabel ( 'Preço de Fechamento' ) 
+plt . grade ( Verdadeiro ) 
+plt . mostrar ()
+
+# Modelo ARIMA 
+model  =  ARIMA ( df [ 'Fechar' ],  order = ( 5 , 1 , 0 )) 
+model_fit  =  model . fit ()
+
+# Resumo do modelo 
+print ( model_fit . summary ())
+
+# Plotando os resíduos do modelo 
+plt . figure ( figsize = ( 10 ,  6 )) 
+plt . plot ( model_fit . resid ,  color = 'green' ) 
+plt . title ( 'Resíduos do Modelo ARIMA' ) 
+plt . xlabel ( 'Dados' ) 
+plt . ylabel ( 'Resíduos' ) 
+plt . grid ( True ) 
+plt . show ()
+
+# Previsões 
+forecast  =  model_fit . forecast ( steps = 30 )
+
+# Plotando as variações 
+plt . figura ( figsize = ( 10 ,  6 )) 
+plt . plot ( df . index ,  df [ 'Fechar' ],  label = 'Observado' ,  color = 'blue' ) 
+plt . plot ( pd . intervalo_data ( início = df . índice [ - 1 ],  períodos = 31 ,  freq = 'B' )[ 1 :],  previsão ,  rótulo = 'Previsão' ,  cor = 'vermelho' ) 
+plt . title ( 'Previsão de Preços das Ações do Walmart' ) 
+plt . xlabel ( 'Dados' ) 
+plt . ylabel ( 'Preço de Fechamento' ) 
+plt . legenda () 
+plt . grade ( Verdadeiro ) 
+plt . mostrar ()
+
+# Relatório 
+print ( " \n Relatório:" ) 
+print ( "O modelo ARIMA foi ajustado aos dados históricos de preços de fechamento das ações do Walmart." ) 
+print ( "Com base nos resíduos do modelo, parece que não há padrões válidos remanescentes ." ) 
+print ( "As previsões futuras mostram uma tendência de aumento nos preços das ações do Walmart." ) 
+print ( "No entanto, é importante considerar outras variáveis ​​e eventos externos que podem afetar os preços das ações." ) 
+print ( " \n Dados Externos Relevantes:" ) 
+print ( "- Relatórios financeiros trimestrais do Walmart" ) 
+print ( "- Notícias sobre a empresa e o setor de varejo" ) 
+print ( "- Indicadores econômicos, como taxas de juros e indicadores de consumo" )
+O Matplotlib está construindo o cache de fontes; isso pode demorar um pouco.
+Nenhuma descrição foi fornecida para esta imagem
+/opt/conda/envs/anaconda-panel-2023.05-py310/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: Um índice de data foi fornecido, mas não tem informações de frequência associadas e, portanto, será ignorado, por exemplo, em previsões.
+  self._init_dates(datas, freq)
+/opt/conda/envs/anaconda-panel-2023.05-py310/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: Um índice de data foi fornecido, mas não tem informações de frequência associadas e, portanto, será ignorado, por exemplo, em previsões.
+  self._init_dates(datas, freq)
+/opt/conda/envs/anaconda-panel-2023.05-py310/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:473: ValueWarning: Um índice de data foi fornecido, mas não tem informações de frequência associadas e, portanto, será ignorado, por exemplo, em previsões.
+  self._init_dates(datas, freq)
+                               Resultados SARIMAX                                
+================================================= ============================
+Variável Dep.: Fechar Nº Observações: 6118
+Modelo: ARIMA(5, 1, 0) Log Verossimilhança -2826.687
+Data: Qua, 15 de maio de 2024 AIC 5665.373
+Hora: 22:46:20 BIC 5705.686
+Amostra: 0 HQIC 5679.359
+                               - 6118                                         
+Tipo de covariância: opg                                         
+================================================= ============================
+                 coef erro padrão z P>|z| [0,025 0,975]
+-------------------------------------------------- ----------------------------
+ar.L1 -0,0451 0,005 -9,129 0,000 -0,055 -0,035
+ar.L2 -0,0286 0,006 -4,415 0,000 -0,041 -0,016
+ar.L3 -0,0148 0,006 -2,279 0,023 -0,027 -0,002
+ar.L4 -0,0384 0,008 -4,695 0,000 -0,054 -0,022
+ar.L5 -0,0108 0,009 -1,207 0,227 -0,028 0,007
+sigma2 0,1475 0,001 189,057 0,000 0,146 0,149
+================================================= ================================
+Ljung-Box (L1) (Q): 0,00 Jarque-Bera (JB): 142037,16
+Probabilidade(Q): 0,97 Probabilidade(JB): 0,00
+Heterocedasticidade (H): 2,89 Inclinação: -0,61
+Prob(H) (bilateral): 0,00 Curtose: 26,58
+================================================= ================================
+
+Avisos:
+[1] Matriz de covariância calculada usando o produto externo de gradientes (etapa complexa).
+Nenhuma descrição foi fornecida para esta imagem
+/opt/conda/envs/anaconda-panel-2023.05-py310/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:836: ValueWarning: Nenhum índice suportado está disponível. Os resultados da previsão serão fornecidos com um índice inteiro começando em `start`.
+  retornar get_prediction_index(
+/opt/conda/envs/anaconda-panel-2023.05-py310/lib/python3.11/site-packages/statsmodels/tsa/base/tsa_model.py:836: FutureWarning: Nenhum índice suportado está disponível. Na próxima versão, chamar esse método em um modelo sem um índice suportado resultará em uma exceção.
+  retornar get_prediction_index(
+Nenhuma descrição foi fornecida para esta imagem
+Relatório:
+O modelo ARIMA foi ajustado aos dados históricos de preços de fechamento das ações do Walmart.
+Com base nos resíduos do modelo, parece que não há padrões importantes remanescentes.
+As previsões futuras mostram uma tendência de aumento nos preços das ações do Walmart.
+No entanto, é importante considerar outras variáveis ​​e eventos externos que podem afetar os preços das ações.
+
+Dados Externos Relevantes:
+- Relatórios financeiros trimestrais do Walmart
+- Notícias sobre a empresa e o setor de varejo
+- Indicadores económicos, como taxas de juros e indicadores de consumo
+ 
